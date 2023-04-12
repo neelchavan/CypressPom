@@ -10,22 +10,22 @@ describe("Shop page test", () => {
     cy.visit(Cypress.env("baseUrl"));
   });
 
-  // it("Check when clicked on checkout button it should should redirect to checkout page", () => {
-  //   // go to the shop page
-  //   hp.getShopNavigationButton().click();
-  //   // go to checkout page
-  //   sp.getCheckoutButton().click();
-  //   // verify if the checkout button is visible
-  //   sp.getCheckoutButton().should("be.visible");
-  // });
+  it("Check when clicked on checkout button it should should redirect to checkout page", () => {
+    // go to the shop page
+    hp.getShopNavigationButton().click();
+    // go to checkout page
+    sp.getCheckoutButton().click();
+    // verify if the checkout button is visible
+    sp.getCheckoutButton().should("be.visible");
+  });
 
-  // it("Add product to a cart by it's name", () => {
-  //   // go to the shop page
-  //   hp.getShopNavigationButton().click();
-  //   // add 'nokia' and 'blackberry' product to the cart
-  //   cy.addProductToCartByName("Nokia");
-  //   cy.addProductToCartByName("Blackberry");
-  // });
+  it("Add product to a cart by it's name", () => {
+    // go to the shop page
+    hp.getShopNavigationButton().click();
+    // add 'nokia' and 'blackberry' product to the cart
+    cy.addProductToCartByName("Nokia");
+    cy.addProductToCartByName("Blackberry");
+  });
 
   it("E2E Scenario for purchasing the product", () => {
     // go to the shop page
