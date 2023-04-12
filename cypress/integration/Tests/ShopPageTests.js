@@ -2,6 +2,7 @@ import HomePage from "../PageObjects/HomePage";
 import ShopPage from "../PageObjects/ShopPage";
 
 describe("Shop page test", () => {
+  Cypress.config("defaultCommandTimeout", 8000);
   const hp = new HomePage();
   const sp = new ShopPage();
 
@@ -32,24 +33,29 @@ describe("Shop page test", () => {
     // add 'Samsung' and 'iphone' products to the cart
     cy.addProductToCartByName("Samsung");
     cy.addProductToCartByName("iphone");
+    cy.addProductToCartByName("Nokia");
     // go to checkout page
     sp.getCheckoutButton().click();
     // verify if the products added to the cart are correct.
     cy.verifyIfProdctAddedToCartIsCorrect("iphone");
     cy.verifyIfProdctAddedToCartIsCorrect("Samsung");
-
+    cy.verifyIfProdctAddedToCartIsCorrect("Nokia");
     // verify if the products total is correct.
-    var totalCost = 0;
-    cy.get("table td:nth-child(4) strong")
-      .each((el, index, list) => {
-        totalCost = totalCost + Number(el.text().split(" ")[1]);
-      })
-      .then((el) => {
-        cy.log(`Total cost is ${totalCost}`);
-        cy.log(sp.getTotalCostText());
-        //const displayedCost = sp.getTotalCostText();
-        //cy.log(displayedCost);
-        //expect(totalCost.toString()).to.equal(displayedCost.split(" ")[1]);
-      });
+    cy.verifyIfTheProductsTotalIscorrect();
+    // proceed to checkout
+    sp.getCheckoutButton().click();
+    // type the delivery location
+    sp.getDeliveryLocationTextBox().type("India");
+    // select the location from options
+    sp.getCountryOption().click();
+    // agree terms and policy
+    sp.getTermsAndPolicyCheckBox().click({ force: true });
+    // click on purchase button
+    sp.getPurchaseButton().click();
+    // verify if purchase was successful
+    sp.getSuccessAlert().then((el) => {
+      const text = el.text();
+      expect(text).to.equal("Success!");
+    });
   });
 });

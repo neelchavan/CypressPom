@@ -3,13 +3,28 @@ class ShopPage {
     return cy.contains("Checkout");
   }
 
-  getTotalCostText() {
-    let text;
-    cy.get("h3 strong").then((el) => {
-      text = el.text();
-      cy.log(text);
-      return text;
-    });
+  getTotalCost() {
+    return cy.get("h3 strong");
+  }
+
+  getDeliveryLocationTextBox() {
+    return cy.get("#country");
+  }
+
+  getCountryOption() {
+    return cy.get(".suggestions ul li a");
+  }
+
+  getTermsAndPolicyCheckBox() {
+    return cy.get("#checkbox2");
+  }
+
+  getPurchaseButton() {
+    return cy.contains("Purchase");
+  }
+
+  getSuccessAlert() {
+    return cy.get("strong");
   }
 }
 

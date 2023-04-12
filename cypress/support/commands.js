@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import ShopPage from "../integration/PageObjects/ShopPage";
+
 // Based on product name the function should be able to add the product to the cart
 Cypress.Commands.add("addProductToCartByName", (nameOfProduct) => {
   cy.get("app-card h4 a").each((el, index, list) => {
@@ -42,4 +44,21 @@ Cypress.Commands.add("verifyIfProdctAddedToCartIsCorrect", (nameOfProduct) => {
     const name = el.text();
     assert.isTrue(name.includes(nameOfProduct));
   });
+});
+
+// verify if the products total is correct.
+let totalCost = 0;
+Cypress.Commands.add("verifyIfTheProductsTotalIscorrect", () => {
+  const sp = new ShopPage();
+  cy.get("table td:nth-child(4) strong")
+    .each((el, index, list) => {
+      totalCost = totalCost + Number(el.text().split(" ")[1]);
+    })
+    .then((el) => {
+      cy.log(`Total cost is ${totalCost}`);
+      sp.getTotalCost().then((el) => {
+        const displayedCost = el.text().split(" ")[1];
+        expect(totalCost.toString()).to.equal(displayedCost);
+      });
+    });
 });
