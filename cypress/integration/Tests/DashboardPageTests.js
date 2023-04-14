@@ -35,5 +35,9 @@ describe("E2E scenario for purchasing the product", () => {
       }
     });
     op.getPlaceOrderButton().click();
+    cy.wait(3000);
+    // Download csv and excel files
+    op.getDownloadCsvButton().click();
+    op.getDownloadExcelButton().click();
   });
 });

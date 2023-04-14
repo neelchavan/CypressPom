@@ -10,5 +10,13 @@ class OrderPage {
   getPlaceOrderButton() {
     return cy.contains("Place Order ");
   }
+
+  getDownloadCsvButton() {
+    return cy.contains("in CSV");
+  }
+
+  getDownloadExcelButton() {
+    return cy.contains("in Excel");
+  }
 }
 export default OrderPage;
