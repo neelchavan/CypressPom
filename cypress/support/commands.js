@@ -62,3 +62,14 @@ Cypress.Commands.add("verifyIfTheProductsTotalIscorrect", () => {
       });
     });
 });
+
+// automating login scenario
+Cypress.Commands.add("loginApi", () => {
+  cy.request("POSt", "https://rahulshettyacademy.com/api/ecom/auth/login", {
+    userEmail: "neelchavan418@gmail.com",
+    userPassword: "Engineer1000!",
+  }).then((res) => {
+    expect(res.status).to.eq(200);
+    Cypress.env("token", res.body.token);
+  });
+});
