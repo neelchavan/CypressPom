@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run",
+    "testChrome": "npm run test -- --browser=chrome",
+    "testFirefox": "npm run test -- --browser=firefox",
+    "testHeadedChrome": "npm run test -- --headed --browser=chrome",
+    "testHeadedFirefox": "npm run test -- --headed --browser=firefox"
   },
   "keywords": [],
   "author": "",
