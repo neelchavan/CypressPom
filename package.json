@@ -16,5 +16,9 @@
   "devDependencies": {
     "cypress": "^12.9.0",
     "cypress-mochawesome-reporter": "^3.3.0"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "latest",
+    "@cypress/browserify-preprocessor":"latest"
   }
 }
